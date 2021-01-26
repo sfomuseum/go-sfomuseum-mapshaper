@@ -20,7 +20,7 @@ func InnerPointHandler(ms *mapshaper.Mapshaper) (http.Handler, error) {
 		opts := &uploadOptions{
 			MaxBytes: 1 * 1024 * 1024,
 		}
-		
+
 		tmp_fh, err := uploadWithRequest(rsp, req, opts)
 
 		if err != nil {

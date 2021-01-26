@@ -3,9 +3,9 @@ package mapshaper
 import (
 	"context"
 	"errors"
+	"log"
 	"os"
 	"os/exec"
-	"log"
 )
 
 type Mapshaper struct {
@@ -23,7 +23,7 @@ func NewMapshaper(ctx context.Context, path string) (*Mapshaper, error) {
 	if info.IsDir() {
 		return nil, errors.New("Invalid path")
 	}
-	
+
 	ms := &Mapshaper{
 		path: path,
 	}
@@ -34,7 +34,7 @@ func NewMapshaper(ctx context.Context, path string) (*Mapshaper, error) {
 func (ms *Mapshaper) Call(ctx context.Context, args ...string) ([]byte, error) {
 
 	log.Println(ms.path, args)
-	
+
 	cmd := exec.CommandContext(ctx, ms.path, args...)
 	return cmd.Output()
 }

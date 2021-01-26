@@ -2,8 +2,8 @@ package main
 
 import (
 	"context"
-	"flag"
 	"github.com/aaronland/go-http-server"
+	"github.com/sfomuseum/go-flags/flagset"
 	"github.com/sfomuseum/go-sfomuseum-mapshaper"
 	"github.com/sfomuseum/go-sfomuseum-mapshaper/api"
 	"log"
@@ -12,8 +12,18 @@ import (
 
 func main() {
 
-	server_uri := flag.String("server-uri", "http://localhost:8080", "A valid aaronland/go-http-server URI")
-	mapshaper_path := flag.String("mapshaper-path", "/usr/local/bin/mapshaper", "...")
+	fs := flagset.NewFlagSet("mapshaper-server")
+
+	server_uri := fs.String("server-uri", "http://localhost:8080", "A valid aaronland/go-http-server URI")
+	mapshaper_path := fs.String("mapshaper-path", "/usr/local/bin/mapshaper", "...")
+
+	flagset.Parse(fs)
+
+	err := flagset.SetFlagsFromEnvVars(fs, "MAPSHAPER")
+
+	if err != nil {
+		log.Fatalf("Failed to set flags from environment variables, %v", err)
+	}
 
 	ctx := context.Background()
 
