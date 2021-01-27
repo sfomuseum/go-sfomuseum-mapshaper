@@ -27,7 +27,7 @@ func InnerPointHandler(ms *mapshaper.Mapshaper) (http.Handler, error) {
 			http.Error(rsp, err.Error(), http.StatusInternalServerError)
 			return
 		}
-
+		
 		defer os.Remove(tmp_fh.Name())
 
 		ctx := req.Context()

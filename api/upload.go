@@ -1,7 +1,7 @@
 package api
 
 import (
-	"errors"
+	// "errors"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -16,13 +16,9 @@ func uploadWithRequest(rsp http.ResponseWriter, req *http.Request, opts *uploadO
 
 	req.Body = http.MaxBytesReader(rsp, req.Body, opts.MaxBytes)
 
-	if err := req.ParseForm(); err != nil {
-		return nil, errors.New("Bad request")
-	}
-
 	defer req.Body.Close()
 
-	tmp_fh, err := ioutil.TempFile("", "mapshaper")
+	tmp_fh, err := ioutil.TempFile("", "mapshaper-*.geojson")
 
 	if err != nil {
 		return nil, err
