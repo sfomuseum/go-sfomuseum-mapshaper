@@ -9,12 +9,12 @@ import (
 )
 
 type uploadOptions struct {
-	MaxBytes int64
+	MaxSize int64
 }
 
 func uploadWithRequest(rsp http.ResponseWriter, req *http.Request, opts *uploadOptions) (*os.File, error) {
 
-	req.Body = http.MaxBytesReader(rsp, req.Body, opts.MaxBytes)
+	req.Body = http.MaxBytesReader(rsp, req.Body, opts.MaxSize)
 
 	defer req.Body.Close()
 

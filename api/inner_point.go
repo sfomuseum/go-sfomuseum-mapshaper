@@ -1,12 +1,11 @@
 package api
 
 import (
-	"github.com/sfomuseum/go-sfomuseum-mapshaper"
 	"net/http"
 	"os"
 )
 
-func InnerPointHandler(ms *mapshaper.Mapshaper) (http.Handler, error) {
+func InnerPointHandler(opts *MapshaperAPIOptions) (http.Handler, error) {
 
 	fn := func(rsp http.ResponseWriter, req *http.Request) {
 
@@ -17,17 +16,17 @@ func InnerPointHandler(ms *mapshaper.Mapshaper) (http.Handler, error) {
 			http.Error(rsp, "Method not allowed", http.StatusMethodNotAllowed)
 		}
 
-		opts := &uploadOptions{
-			MaxBytes: 1 * 1024 * 1024,
+		upload_opts := &uploadOptions{
+			MaxSize: opts.UploadsMaxSize,
 		}
 
-		tmp_fh, err := uploadWithRequest(rsp, req, opts)
+		tmp_fh, err := uploadWithRequest(rsp, req, upload_opts)
 
 		if err != nil {
 			http.Error(rsp, err.Error(), http.StatusInternalServerError)
 			return
 		}
-		
+
 		defer os.Remove(tmp_fh.Name())
 
 		ctx := req.Context()
@@ -41,7 +40,7 @@ func InnerPointHandler(ms *mapshaper.Mapshaper) (http.Handler, error) {
 			"-",
 		}
 
-		out, err := ms.Call(ctx, args...)
+		out, err := opts.Mapshaper.Call(ctx, args...)
 
 		if err != nil {
 			http.Error(rsp, err.Error(), http.StatusInternalServerError)

@@ -3,7 +3,6 @@ package mapshaper
 import (
 	"context"
 	"errors"
-	"log"
 	"os"
 	"os/exec"
 )
@@ -32,8 +31,6 @@ func NewMapshaper(ctx context.Context, path string) (*Mapshaper, error) {
 }
 
 func (ms *Mapshaper) Call(ctx context.Context, args ...string) ([]byte, error) {
-
-	log.Println(ms.path, args)
 
 	cmd := exec.CommandContext(ctx, ms.path, args...)
 	return cmd.Output()
