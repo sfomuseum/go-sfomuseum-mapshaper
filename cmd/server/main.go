@@ -22,7 +22,8 @@ func main() {
 
 	fs.Usage = func() {
 		fmt.Fprintf(os.Stderr, "A simple HTTP server to expose the mapserver-cli tool. Currently, only the '-points inner' functionality is exposed.\n")
-		fmt.Fprintf(os.Stderr, "Usage:\n\t %s [options]\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "Usage:\n\t %s [options]\n\n", os.Args[0])
+		fmt.Fprintf(os.Stderr, "Valid options are:\n")
 		fs.PrintDefaults()
 	}
 

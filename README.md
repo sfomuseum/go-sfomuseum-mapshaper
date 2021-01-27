@@ -9,10 +9,12 @@ Work in progress. Documentation to follow.
 ### server
 
 ```
-> go run cmd/server/main.go -h
+$> bin/server
 A simple HTTP server to expose the mapserver-cli tool. Currently, only the '-points inner' functionality is exposed.
 Usage:
-	 /var/folders/_k/h7ndzcyx3dq027gsrg1q45xm0000gn/T/go-build995870348/b001/exe/main [options]
+	 /bin/server [options]
+	 
+Valid options are:	 
   -mapshaper-path string
     	The path to your mapshaper binary. (default "/usr/local/bin/mapshaper")
   -server-uri string
