@@ -50,13 +50,21 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	handler, err := api.InnerPointHandler(opts)
+	ping_handler, err := api.PingHandler()
+
+	if err != nil {
+		log.Fatalf("Failed to create ping handler, %v", err)
+	}
+
+	mux.Handle("/api/ping", ping_handler)
+	
+	innerpoint_handler, err := api.InnerPointHandler(opts)
 
 	if err != nil {
 		log.Fatalf("Failed to create inner point handler, %v", err)
 	}
 
-	mux.Handle("/api/innerpoint", handler)
+	mux.Handle("/api/innerpoint", innerpoint_handler)
 
 	s, err := server.NewServer(ctx, *server_uri)
 
