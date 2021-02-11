@@ -57,7 +57,7 @@ func main() {
 	}
 
 	mux.Handle("/api/ping", ping_handler)
-	
+
 	innerpoint_handler, err := api.InnerPointHandler(opts)
 
 	if err != nil {

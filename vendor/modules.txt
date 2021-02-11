@@ -8,6 +8,9 @@ github.com/aws/aws-lambda-go/lambda
 github.com/aws/aws-lambda-go/lambda/handlertrace
 github.com/aws/aws-lambda-go/lambda/messages
 github.com/aws/aws-lambda-go/lambdacontext
+# github.com/paulmach/orb v0.2.1
+github.com/paulmach/orb
+github.com/paulmach/orb/geojson
 # github.com/sfomuseum/go-flags v0.5.0
 github.com/sfomuseum/go-flags/flagset
 # github.com/whosonfirst/algnhsa v0.1.0
