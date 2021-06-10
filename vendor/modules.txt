@@ -13,6 +13,8 @@ github.com/aws/aws-lambda-go/lambdacontext
 # github.com/paulmach/orb v0.2.2
 github.com/paulmach/orb
 github.com/paulmach/orb/geojson
+# github.com/rs/cors v1.7.0
+github.com/rs/cors
 # github.com/sfomuseum/go-flags v0.8.2
 github.com/sfomuseum/go-flags/flagset
 # github.com/whosonfirst/algnhsa v0.1.0

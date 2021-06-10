@@ -3,14 +3,16 @@ package main
 import (
 	"context"
 	"fmt"
+	"github.com/aaronland/go-http-ping"
 	"github.com/aaronland/go-http-server"
-	"github.com/aaronland/go-http-ping"	
+	"github.com/rs/cors"
 	"github.com/sfomuseum/go-flags/flagset"
 	"github.com/sfomuseum/go-sfomuseum-mapshaper"
 	"github.com/sfomuseum/go-sfomuseum-mapshaper/api"
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 
 func main() {
@@ -20,6 +22,9 @@ func main() {
 	server_uri := fs.String("server-uri", "http://localhost:8080", "A valid aaronland/go-http-server URI.")
 	mapshaper_path := fs.String("mapshaper-path", "/usr/local/bin/mapshaper", "The path to your mapshaper binary.")
 	max_bytes := fs.Int64("uploads-max-bytes", 1024*1024, "The maximum allowed size (in bytes) for uploads.")
+
+	enable_cors := fs.Bool("enable-cors", false, "Enable support for CORS headers")
+	str_allowed_origins := fs.String("allowed-origins", "", "A comma-separated list of hosts to allow CORS requests from.")
 
 	fs.Usage = func() {
 		fmt.Fprintf(os.Stderr, "A simple HTTP server to expose the mapserver-cli tool. Currently, only the '-points inner' functionality is exposed.\n")
@@ -63,6 +68,17 @@ func main() {
 
 	if err != nil {
 		log.Fatalf("Failed to create inner point handler, %v", err)
+	}
+
+	if *enable_cors {
+
+		allowed_origins := strings.Split(*str_allowed_origins, ",")
+
+		cors_handler := cors.New(cors.Options{
+			AllowedOrigins: allowed_origins,
+		})
+
+		innerpoint_handler = cors_handler.Handler(innerpoint_handler)
 	}
 
 	mux.Handle("/api/innerpoint", innerpoint_handler)

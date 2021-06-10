@@ -1,9 +1,9 @@
 package api
 
 import (
-	// "errors"
 	"io"
 	"io/ioutil"
+	_ "log"
 	"net/http"
 	"os"
 )

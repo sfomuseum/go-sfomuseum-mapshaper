@@ -13,8 +13,8 @@ FROM node:15-alpine
 
 COPY --from=builder /usr/local/bin/mapshaper-server /usr/local/bin/mapshaper-server
 
-RUN mkdir /usr/local/data
-VOLUME /usr/local/data
+# RUN mkdir /usr/local/data
+# COPY 1745882297.geojson /usr/local/data/
 
 RUN apk update && apk upgrade
 RUN npm install -g mapshaper
