@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"github.com/aaronland/go-http-server"
+	"github.com/aaronland/go-http-ping"	
 	"github.com/sfomuseum/go-flags/flagset"
 	"github.com/sfomuseum/go-sfomuseum-mapshaper"
 	"github.com/sfomuseum/go-sfomuseum-mapshaper/api"
@@ -50,7 +51,7 @@ func main() {
 
 	mux := http.NewServeMux()
 
-	ping_handler, err := api.PingHandler()
+	ping_handler, err := ping.PingHandler()
 
 	if err != nil {
 		log.Fatalf("Failed to create ping handler, %v", err)
