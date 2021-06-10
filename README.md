@@ -1,14 +1,18 @@
 # go-sfomuseum-mapshaper
 
-Go package to provide an HTTP endpoint to expose the mapserver-cli tool.
+Go package for interacting with the mapserver-cli tool.
 
-## Important
+## Documentation
 
-Work in progress. Documentation to follow.
+[![Go Reference](https://pkg.go.dev/badge/github.com/sfomuseum/go-sfomuseum-mapshaper.svg)](https://pkg.go.dev/github.com/sfomuseum/go-sfomuseum-mapshaper)
+
+Documentation is incomplete.
 
 ## Tools
 
 ### server
+
+A simple HTTP server to expose the mapserver-cli tool. Currently, only the '-points inner' functionality is exposed.
 
 ```
 $> ./bin/server -h
