@@ -3,16 +3,17 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
+	"net/http"
+	"os"
+	"strings"
+
 	"github.com/aaronland/go-http-ping"
 	"github.com/aaronland/go-http-server"
 	"github.com/rs/cors"
 	"github.com/sfomuseum/go-flags/flagset"
 	"github.com/sfomuseum/go-sfomuseum-mapshaper"
-	"github.com/sfomuseum/go-sfomuseum-mapshaper/api"
-	"log"
-	"net/http"
-	"os"
-	"strings"
+	"github.com/sfomuseum/go-sfomuseum-mapshaper/api"	
 )
 
 func main() {
