@@ -18,5 +18,3 @@ COPY --from=builder /usr/local/bin/mapshaper-server /usr/local/bin/mapshaper-ser
 
 RUN apk update && apk upgrade
 RUN npm install -g mapshaper
-
-ENTRYPOINT ["/usr/local/bin/mapshaper-server"]
