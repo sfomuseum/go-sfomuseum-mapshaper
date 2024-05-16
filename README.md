@@ -38,7 +38,7 @@ Valid options are:
 ```
 $> docker build -t mapshaper-server .
 
-$> docker run -it -p 8080:8080 -e MAPSHAPER_SERVER_URI=http://0.0.0.0:8080 mapshaper-server
+$> docker run -it -p 8080:8080 -e MAPSHAPER_SERVER_URI=http://0.0.0.0:8080 mapshaper-server /usr/local/bin/mapshaper-server
 
 $> curl -s http://localhost:8080/api/innerpoint \
 	-d @fixtures/1745882083.geojson \
