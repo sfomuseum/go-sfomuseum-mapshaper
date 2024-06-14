@@ -1,0 +1,19 @@
+[Unit]
+Description=PMTiles point-in-polygon server
+ConditionPathExists=/usr/local/go-sfomuseum-mapshaper
+After=network.target
+ 
+[Service]
+Type=simple
+User=nobody
+Group=nobody
+LimitNOFILE=1024
+
+Restart=on-failure
+RestartSec=10
+
+WorkingDirectory=/usr/local/go-sfomuseum-mapshaper
+ExecStart=/usr/local/go-sfomuseum-mapshaper/bin/server -mapshaper-path /usr/local/bin/mapshaper -server-uri http://localhost:9001
+ 
+[Install]
+WantedBy=multi-user.target
